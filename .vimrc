@@ -11,7 +11,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
 Plug 'alfredodeza/pytest', { 'for': 'python' }
-Plug 'nvie/vim-flake8', { 'for': 'python' }
+" disabled, incompatible with syntastic
+"Plug 'nvie/vim-flake8', { 'for': 'python' }
 Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'tpope/vim-fugitive'
 Plug 'moll/vim-bbye'
@@ -26,6 +27,7 @@ Plug 'jaxbot/github-issues.vim'
 Plug 'yko/mojo.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'lervag/file-line'
+Plug 'vim-syntastic/syntastic'
 
 " CAUTION conflicts with flake8, either enable flake8 or python mode
 " TODO python mode seems to have some performance impact, maybe configure better
@@ -708,11 +710,12 @@ nmap <silent><Leader>f <Esc>:Pytest file<CR>
 nmap <silent><Leader>c <Esc>:Pytest class<CR>
 nmap <silent><Leader>m <Esc>:Pytest method<CR>
 
-" flake8
-autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
-" check every time you write a Python file
-" TODO pymode seems to also check, let's not call it twice or multiple times on python files
-autocmd BufWritePost *.py call Flake8()
+" disabled, incompatible with syntastic
+""" " flake8
+""" autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
+""" " check every time you write a Python file
+""" " TODO pymode seems to also check, let's not call it twice or multiple times on python files
+""" autocmd BufWritePost *.py call Flake8()
 
 " https://github.com/fisadev/vim-isort
 " vim is using internal python not able to find external modules, e.g. from local pip cache or virtualenv
@@ -757,3 +760,5 @@ vmap <C-S> <esc>:w<CR>gv
 " see
 " https://stackoverflow.com/questions/10300835/too-many-inotify-events-while-editing-in-vim
 set nowritebackup
+
+let g:syntastic_yaml_checkers = ['yamllint']

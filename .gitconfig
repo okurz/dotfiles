@@ -1,0 +1,107 @@
+[user]
+    name = Oliver Kurz
+    email = okurz@suse.de
+
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+
+[svn]
+    rmdir = true
+    addAuthorFrom = true
+    useLogAuthor = true
+
+[gui]
+    fontui = -family \"Liberation Sans\" -size 9 -weight bold -slant roman -underline 0 -overstrike 0
+    fontdiff = -family \"xos4 Terminus\" -size 8 -weight normal -slant roman -underline 0 -overstrike 0
+    encoding = utf-8
+    commitmsgwidth = 78
+    spellingdictionary=none
+    recentrepo = /home/okurz/local/os-autoinst/openQA
+[diff]
+    tool = vimdiff
+[alias]
+    dt = difftool
+    ci = commit
+    co = checkout
+    st = status
+    di = diff
+    cp = cherry-pick
+    logr = log --reverse
+    unmerged = !$EDITOR -p $(git-unmerged-files)
+    resolved = !git add $(git-unmerged-files)
+    request-pull-lst = !git request-pull gerrit/master $(pwd -P)
+    push-lst-rebase = !git push origin krz && git stash && git co master && git pull && git branch -D krz && git co next && git rebase master && (git stash pop || true)
+    rebase-all-branches = !git-rebase-all-branches
+    rebase-all-and-goto-next = !git stash && git rebase-all-branches && git co next && git stash pop
+    push-lst-rebase-all-and-goto-next = !git push-lst-rebase && git rebase-all-and-goto-next
+    ;request-review-lst = !git-request-review-lst
+    ri = rebase --interactive --rerere-autoupdate
+    ria = rebase --interactive --autosquash --rerere-autoupdate
+    rc = rebase --continue
+    ra = rebase --abort
+    rcc = !git resolved && git rebase --continue
+    ;review-branch = !git-review-branch
+    log1 = log --pretty=oneline --abbrev-commit
+    amend = commit --amend -C HEAD
+    push-review = push gerrit HEAD:refs/publish/master
+    push-review-topic = !git push gerrit HEAD:refs/publish/master/$(git current-branch)
+    remove-change-id = filter-branch --msg-filter \"sed '/Change-Id:/d'\"
+    ;push-review-and-submit-rebased = !git-push-review-and-submit-rebased
+    rebase-gerrit-and-push-review-and-submit-rebased = !git fetch gerrit && git rebase gerrit/master && git push-review-and-submit-rebased
+    update-from-all =!git-update-from-all
+    current-branch = !git branch | sed -n 's/^* //p'
+    ls-directories = !git ls-directories
+    root = rev-parse --show-toplevel
+    delete-no-content-branches = delete-no-content-branches
+    hijack-commit = hijack-commit
+    rab = rebase-all-branches
+    rrab = !git rcc && git rebase-all-branches
+
+[guitool "rebase..."]
+    cmd = git rebase $REVISION
+    revprompt = yes
+[guitool "rebase interactive..."]
+    cmd = EDITOR=kate git rebase --interactive --autosquash $REVISION
+    revprompt = yes
+[guitool "stash"]
+    cmd = git stash
+    noconsole = yes
+[guitool "stash pop"]
+    cmd = git stash pop
+[guitool "request-pull (review)"]
+    cmd = git request-pull origin/master `pwd -P`
+[guitool "advanced/request review by email (enter email addresses)"]
+    cmd = git request-pull origin/master `pwd -P` | mail -s \"please review\" $ARGS
+    noconsole = yes
+    argprompt = yes
+[guitool "advanced/abort interactive rebase"]
+    cmd = git rebase --abort
+    noconsole = yes
+[guitool "rebase continue"]
+    cmd = git rebase --continue
+[rerere]
+    enabled = true
+[notes "rewrite"]
+    amend = true
+    rebase = true
+[merge]
+    conflictstyle = diff3
+    tool = vimdiff
+[core]
+    whitespace = trailing-space,space-before-tab,tabwidth=4
+[apply]
+    whitespace = fix
+[rebase]
+    whitespace = fix
+[mergetool]
+    prompt = false
+[credential]
+    helper = cache --timeout=0
+[push]
+    default = simple
+[github]
+    user = okurz
+[log]
+    abbrevCommit = true
