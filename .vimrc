@@ -737,6 +737,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 highlight SignColumn ctermbg=lightgrey
 "let g:gitgutter_sign_column_always = 1
 
+source ~/.vimrc.gittoken
 " When this is set to 1, github-issues will use upstream issues (if repo is fork). This will require extra requests for the Github API, however.
 let g:github_upstream_issues = 1
 "let g:gissues_lazy_load = 0

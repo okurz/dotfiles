@@ -1,3 +1,6 @@
+[include]
+    path = .gitconfig.ghi_token
+
 [user]
     name = Oliver Kurz
     email = okurz@suse.de
