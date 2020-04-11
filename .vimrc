@@ -22,7 +22,6 @@ Plug 'airblade/vim-gitgutter'
 " which I normally use tabs instead
 "Plug 'bling/vim-bufferline'
 Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
-Plug 'jaxbot/github-issues.vim'
 
 Plug 'yko/mojo.vim'
 Plug 'tpope/vim-unimpaired'
