@@ -44,7 +44,9 @@
     ria = rebase --interactive --autosquash --rerere-autoupdate
     rc = rebase --continue
     ra = rebase --abort
+    rs = rebase --skip
     rcc = !git resolved && git rebase --continue
+    rp = !git pull --rebase origin master && git push okurz -f
     ;review-branch = !git-review-branch
     log1 = log --pretty=oneline --abbrev-commit
     amend = commit --amend -C HEAD
@@ -61,6 +63,7 @@
     hijack-commit = hijack-commit
     rab = rebase-all-branches
     rrab = !git rcc && git rebase-all-branches
+    drab = !git delete-no-content-branches && git rebase-all-branches
 
 [guitool "rebase..."]
     cmd = git rebase $REVISION

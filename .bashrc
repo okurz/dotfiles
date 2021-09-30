@@ -434,6 +434,8 @@ function xcol()
 # Free Software Foundation, Inc., 59 Temple Place, Suite 330,
 # Boston, MA  02111-1307  USA
 
-prove() {
-    unbuffer $(which prove) --color $* | xcolorize --unbuffered green '^\s*ok [[:digit:]] - .*$' red 'not ok [[:digit:]]* - .*$'
-}
+# replaced by ~/bin/prove
+#prove() {
+#    unbuffer $(which prove) --color $* | xcolorize --unbuffered green '^\s*ok [[:digit:]] - .*$' red 'not ok [[:digit:]]* - .*$'
+#}
+. ~/.openqa_ipmi_aliases

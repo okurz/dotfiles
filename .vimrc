@@ -761,4 +761,6 @@ vmap <C-S> <esc>:w<CR>gv
 " https://stackoverflow.com/questions/10300835/too-many-inotify-events-while-editing-in-vim
 set nowritebackup
 
+set nu
+
 let g:syntastic_yaml_checkers = ['yamllint']
