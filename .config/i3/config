@@ -1,0 +1,275 @@
+# i3 config file (v4)
+# Please see https://i3wm.org/docs/userguide.html for a complete reference!
+set $mod Mod4
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Liberation Sans 8
+# 2020-08-02: starting i3 on linux-28d7 openSUSE Leap 15.2 showed broken fonts
+# with the following selected, disabled for now
+#font pango:xos4 terminus 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
+
+# start dmenu (a program launcher)
+bindsym $mod+d exec dmenu_run
+# https://wiki.archlinux.org/index.php/I3#KRunner_as_application_launcher_in_KDE_Plasma/i3
+# We have shortcuts free so why not offer krunner as well :)
+set $menu --no-startup-id qdbus org.kde.krunner /App display
+bindsym Mod1+F2 exec $menu
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# There also is the (new) i3-dmenu-desktop which only displays applications
+# shipping a .desktop file. It is a wrapper around dmenu, so you need that
+# installed.
+# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+# "focus left" simulates "alt/mod+tab" as I am used to in awesome well enough
+bindsym $mod+Tab focus left
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+x focus output right
+bindsym $mod+Shift+x focus output up
+
+# move focused window
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+semicolon move right
+
+# alternatively, you can use the cursor keys:
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# Move the current workspace to the next output
+# (effectively toggles when you only have two outputs, but only when they are
+# left-right to each other)
+bindsym $mod+o move workspace to output right
+bindsym $mod+Shift+o move workspace to output up
+
+# split in horizontal orientation
+bindsym $mod+h split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces for which we configure key bindings later on.
+# We use variables to avoid repeating the names in multiple places.
+set $ws1 "1: chat"
+set $ws2 "2: www"
+set $ws3 "3: term"
+set $ws4 "4: pim"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+
+bindsym Shift+XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 1"
+bindsym Shift+XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 1"
+bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5"
+bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5"
+bindsym Control+XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 20"
+bindsym Control+XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 20"
+bindsym $mod+XF86MonBrightnessDown exec --no-startup-id "backlight_intel_notebook 1"
+bindsym $mod+XF86MonBrightnessUp exec --no-startup-id "xbacklight -set 100"
+bindsym XF86AudioMute exec --no-startup-id "amixer sset Master toggle"
+bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 5%-"
+bindsym XF86AudioRaiseVolume exec --no-startup-id "amixer sset Master 5%+"
+bindsym XF86AudioMicMute exec --no-startup-id "amixer sset Capture toggle"
+# bindsym XF86AudioPlay exec --no-startup-id "mocp_toggle_play"
+bindsym XF86AudioPlay exec --no-startup-id "amarok --play-pause"
+bindsym $mod+Shift+F9 exec --no-startup-id "mocp_toggle_play"
+# bindsym XF86AudioPrev exec --no-startup-id "mocp --previous"
+bindsym XF86AudioPrev exec --no-startup-id "amarok --previous"
+bindsym XF86AudioNext exec --no-startup-id "amarok --next"
+bindsym XF86Search exec --no-startup-id "switch_display-linux-28d6"
+bindsym XF86Display exec --no-startup-id "switch_display-linux-28d6"
+bindsym $mod+Shift+F12 exec --no-startup-id "switch_display-linux-28d6"
+bindsym $mod+Control+Insert exec --no-startup-id "sudo systemctl suspend"
+# use 'slock' if installed, otherwise revert to xscreensaver
+# bindsym Control+Mod1+l exec --no-startup-id "slock || /usr/bin/xscreensaver-command -lock"
+bindsym Shift+$mod+F1 exec --no-startup-id "slock"
+bindsym Control+$mod+l exec --no-startup-id "slock"
+bindsym Control+mod1+l exec --no-startup-id "slock"
+bindsym Control+Alt+l exec --no-startup-id "slock"
+# ksnapshot got replaced by spectacle in newer version of plasma
+bindsym Print exec --no-startup-id "spectacle || ksnapshot"
+
+# Dell 2in1 is not detecting key symbols of many keys and also not any special
+# keys so workarounds in place.
+# Also xbacklight does not work so I need to use manual settings
+bindsym Shift+$mod+F6 exec --no-startup-id "backlight_intel_notebook --dec 1"
+bindsym Shift+$mod+F7 exec --no-startup-id "backlight_intel_notebook --inc 1"
+bindsym $mod+F6 exec --no-startup-id "backlight_intel_notebook --dec 5"
+bindsym $mod+F7 exec --no-startup-id "backlight_intel_notebook --inc 5"
+bindsym Control+$mod+F6 exec --no-startup-id "backlight_intel_notebook --dec 20"
+bindsym Control+$mod+F7 exec --no-startup-id "backlight_intel_notebook --inc 20"
+bindsym Control+Shift+$mod+F6 exec --no-startup-id "backlight_intel_notebook 1"
+bindsym Control+Shift+$mod+F7 exec --no-startup-id "backlight_intel_notebook 120000"
+bindsym $mod+F1 exec --no-startup-id "amixer sset Master toggle"
+bindsym $mod+F2 exec --no-startup-id "amixer sset Master 5%-"
+bindsym $mod+F3 exec --no-startup-id "amixer sset Master 5%+"
+bindsym $mod+F4 exec --no-startup-id "amixer sset Capture toggle"
+
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym j resize shrink width 10 px or 10 ppt
+    bindsym k resize grow height 10 px or 10 ppt
+    bindsym l resize shrink height 10 px or 10 ppt
+    bindsym semicolon resize grow width 10 px or 10 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Down resize grow height 10 px or 10 ppt
+    bindsym Up resize shrink height 10 px or 10 ppt
+    bindsym Right resize grow width 10 px or 10 ppt
+
+    # back to normal: Enter or Escape or $mod+r
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+    bindsym $mod+r mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+#default_border pixel 0
+hide_edge_borders both
+workspace_auto_back_and_forth yes
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+    status_command i3status
+}
+
+exec --no-startup-id "/home/okurz/.fehbg"
+
+exec --no-startup-id "nm-applet --sm-disable"
+exec --no-startup-id neo2
+exec --no-startup-id "xset -b s 1600 1700 dpms 1800 1800 1800"
+exec --no-startup-id "xinput --set-prop 'Logitech USB-PS/2 Optical Mouse' 'libinput Accel Speed' 1"
+exec gnome-keyring-daemon
+exec --no-startup-id "dropbox start"
+#"xscreensaver -nosplash", -- using slock instead now
+# make slock trigger on wakeup from standby/suspend, see http://unix.stackexchange.com/a/174837/141041
+exec --no-startup-id "xss-lock slock"
+
+# mini-services
+# this could maybe also be replaced by systemd user services, also see
+# https://wiki.archlinux.org/index.php/Systemd/User
+# pickups replaced by bitlbee with libpurple on kurz-wue.on-ip.org
+#exec --no-startup-idrun_once run_pickups.sh",
+#"run_once bitlbee_local", -- shouldn't need that when I have it on kurz-wue.no-ip.org, right?
+
+#exec konversation
+exec telegram
+exec --no-startup-id i3-msg "workspace $ws1; exec slack; workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws1; exec chromium; workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws4; exec kontact; workspace $ws1"
+exec thunderbird
+exec firefox
+exec --no-startup-id redshift
+exec --no-startup-id /usr/lib64/libexec/polkit-kde-authentication-agent-1
+exec --no-startup-id caffeine
+#"env process='autossh.*65001' run_once ssh-tunnel_ibrokeit.suse.de_auto_65001"
+exec --no-startup-id "env process='openvpn/SUSE-okurz-NUE' run_once openvpn_suse"
+exec --no-startup-id "sleep 8; env process='autossh.*65000' run_once ssh-tunnel_kurz-wue_auto_65000"
+exec --no-startup-id "env process='sleep.*28' run_once fix-pulseaudio-headset-mic-preference"
+exec --no-startup-id i3-msg "workspace $ws3; exec urxvt; workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws3; exec urxvt; workspace $ws1"
+exec audacious
+exec pavucontrol
+#exec --no-startup-id i3-msg "workspace $ws5; exec kapow; workspace $ws1"
+exec --no-startup-id qsyncthingtray
+exec --no-startup-id i3-msg "workspace $ws8; exec sipgate; workspace $ws1"
+# https://superuser.com/questions/1147320/how-to-change-keyboard-layout-in-i3
+exec_always "setxkbmap de neo"
+
+assign [class="Konversation"] $ws1
+assign [class="Slack"] $ws1
+assign [class="Telegram"] $ws1
+assign [class="Firefox"] $ws2
+#assign [class="^URxvt$"] $ws3
+#assign [class="kontact"] $ws4
+assign [class="Thunderbird"] $ws4
+assign [class="Audacious"] $ws5
+assign [class="Pavucontrol"] $ws5
+assign [class="Sipgate"] $ws8
