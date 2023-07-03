@@ -81,11 +81,25 @@ URxvt.url-select.underline: true
 !*Rxvt.keysym.Control-Right: \033[1;5C
 !*Rxvt.keysym.C-Left: \033[1;5D
 !*Rxvt.keysym.C-Right: \033[1;5C
+!Xterm escapes, word by word movement
 ! okurz: 2018-06-19: Since upgrade of linux-28d6 to openSUSE Leap 15.0 alt-left/right does not work anymore, we need this now
-*Rxvt*keysym.M-Up:            \033[1;3A
-*Rxvt*keysym.M-Down:          \033[1;3B
-*Rxvt.keysym.M-Left: \033[1;3D
-*Rxvt.keysym.M-Right: \033[1;3C
+! okurz: 2022-07-16: After upgrade from Leap 15.3 to Leap 15.4 this also
+! stopped working so disabling but also does not help
+! see https://wiki.archlinux.org/title/Rxvt-unicode/Tips_and_tricks#Xterm_escape_sequences
+!*Rxvt.keysym.M-Up: \033[1;3A
+!*Rxvt.keysym.M-Down: \033[1;3B
+!*Rxvt.keysym.M-Left: \033[1;3D
+!*Rxvt.keysym.M-Right: \033[1;3C
+!*Rxvt.keysym.Meta-Up: \033[1;3A
+!*Rxvt.keysym.Meta-Down: \033[1;3B
+!*Rxvt.keysym.Meta-Left: \033[1;3D
+!*Rxvt.keysym.Meta-Right: \033[1;3C
+!*Rxvt.keysym.Alt_L-Up:            \033[1;3A
+!*Rxvt.keysym.Alt_L-Down:          \033[1;3B
+!*Rxvt.keysym.Alt_L-Left: \033[1;3D
+!*Rxvt.keysym.Alt_L-Right: \033[1;3C
+
+URxvt.iso14755:         False
 
 !
 !aterm*font:                 -*-terminus-*-*-*-*-12-*-*-*-*-*-*-*
