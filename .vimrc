@@ -56,6 +56,8 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plugin outside ~/.vim/plugged with post-update hook
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
+Plug 'madox2/vim-ai'
+
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
 
