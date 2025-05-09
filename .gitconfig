@@ -102,3 +102,5 @@
 [safe]
 	directory = /tmp
 	directory = /home/okurz/local/os-autoinst/os-autoinst
+[commit]
+    gpgsign = true
