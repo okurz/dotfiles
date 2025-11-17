@@ -1,19 +1,14 @@
 " should be replaced by vim-plug but not all plugins are found yet just using
 " Plug
-call pathogen#infect()
+"call pathogen#infect()
 
 
 call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
-"Plug 'junegunn/seoul256.vim'
-"Plug 'junegunn/vim-easy-align'
 Plug 'vim-perl/vim-perl', { 'for': 'perl', 'do': 'make clean carp dancer highlight-all-pragmas moose test-more try-tiny' }
 
 Plug 'alfredodeza/pytest', { 'for': 'python' }
-" disabled, incompatible with syntastic
-"Plug 'nvie/vim-flake8', { 'for': 'python' }
-Plug 'fisadev/vim-isort', { 'for': 'python' }
 Plug 'tpope/vim-fugitive'
 Plug 'moll/vim-bbye'
 Plug 'airblade/vim-gitgutter'
@@ -26,11 +21,7 @@ Plug 'alfredodeza/coveragepy.vim', { 'for': 'python' }
 Plug 'yko/mojo.vim'
 Plug 'tpope/vim-unimpaired'
 Plug 'lervag/file-line'
-Plug 'vim-syntastic/syntastic'
-
-" CAUTION conflicts with flake8, either enable flake8 or python mode
-" TODO python mode seems to have some performance impact, maybe configure better
-"Plug 'klen/python-mode', { 'for': 'python' }
+Plug 'dense-analysis/ale'
 
 " cool statusbar, it is only enabled in a single buffer window with
 " 'set laststatus=2' (or with multiple windows)
@@ -56,7 +47,7 @@ Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 " Plugin outside ~/.vim/plugged with post-update hook
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 
-Plug 'madox2/vim-ai'
+"Plug 'madox2/vim-ai'
 
 " Unmanaged plugin (manually installed and updated)
 "Plug '~/my-prototype-plugin'
@@ -569,7 +560,7 @@ colorscheme default
 "
 
 " with pencil
-hi Search ctermbg=LightGrey
+hi Search ctermbg=Grey
 
 
 " If using a dark background within the editing area and syntax highlighting
@@ -711,19 +702,6 @@ nmap <silent><Leader>f <Esc>:Pytest file<CR>
 nmap <silent><Leader>c <Esc>:Pytest class<CR>
 nmap <silent><Leader>m <Esc>:Pytest method<CR>
 
-" disabled, incompatible with syntastic
-""" " flake8
-""" autocmd FileType python map <buffer> <F3> :call Flake8()<CR>
-""" " check every time you write a Python file
-""" " TODO pymode seems to also check, let's not call it twice or multiple times on python files
-""" autocmd BufWritePost *.py call Flake8()
-
-" https://github.com/fisadev/vim-isort
-" vim is using internal python not able to find external modules, e.g. from local pip cache or virtualenv
-" modules, also see https://github.com/fisadev/fisa-vim-config/issues/65#issuecomment-34627224
-" Got it to work on linux-28d6 by installing "python-pip" (for python2) and then "sudo pip install isort"
-let g:vim_isort_map = '<C-i>'
-
 set laststatus=2 " Always display the statusline in all windows
 "set showtabline=2 " Always display the tabline, even if there is only one tab
 set noshowmode " Hide the default mode text (e.g. -- INSERT -- below the statusline)
@@ -765,4 +743,22 @@ set nowritebackup
 
 set nu
 
-let g:syntastic_yaml_checkers = ['yamllint']
+let g:ale_linters = {'python': ['ruff']}
+
+" https://docs.astral.sh/ruff/editors/setup/#vim
+if executable('ruff')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'ruff',
+        \ 'cmd': {server_info->['ruff', 'server']},
+        \ 'allowlist': ['python'],
+        \ 'workspace_config': {},
+        \ })
+endif
+function! s:on_lsp_buffer_enabled() abort
+    " add your keybindings here (see https://github.com/prabirshrestha/vim-lsp?tab=readme-ov-file#registering-servers)
+
+    let l:capabilities = lsp#get_server_capabilities('ruff')
+    if !empty(l:capabilities)
+      let l:capabilities.hoverProvider = v:false
+    endif
+endfunction

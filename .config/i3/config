@@ -141,7 +141,7 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 5"
 bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 5"
 bindsym Control+XF86MonBrightnessDown exec --no-startup-id "xbacklight -dec 20"
 bindsym Control+XF86MonBrightnessUp exec --no-startup-id "xbacklight -inc 20"
-bindsym $mod+XF86MonBrightnessDown exec --no-startup-id "backlight_intel_notebook 1"
+bindsym $mod+XF86MonBrightnessDown exec --no-startup-id "backlight-notebook 1"
 bindsym $mod+XF86MonBrightnessUp exec --no-startup-id "xbacklight -set 100"
 bindsym XF86AudioMute exec --no-startup-id "amixer sset Master toggle"
 bindsym XF86AudioLowerVolume exec --no-startup-id "amixer sset Master 5%-"
@@ -162,21 +162,23 @@ bindsym $mod+Control+Insert exec --no-startup-id "sudo systemctl suspend"
 bindsym Shift+$mod+F1 exec --no-startup-id "slock"
 bindsym Control+$mod+l exec --no-startup-id "slock"
 bindsym Control+mod1+l exec --no-startup-id "slock"
-bindsym Control+Alt+l exec --no-startup-id "slock"
+# okurz: 2025-07-31: disabled due to sway startup warning about 'overwriting
+# binding', probably with above mod1 one
+#bindsym Control+Alt+l exec --no-startup-id "slock"
 # ksnapshot got replaced by spectacle in newer version of plasma
 bindsym Print exec --no-startup-id "spectacle || ksnapshot"
 
 # Dell 2in1 is not detecting key symbols of many keys and also not any special
 # keys so workarounds in place.
 # Also xbacklight does not work so I need to use manual settings
-bindsym Shift+$mod+F6 exec --no-startup-id "backlight_intel_notebook --dec 1"
-bindsym Shift+$mod+F7 exec --no-startup-id "backlight_intel_notebook --inc 1"
-bindsym $mod+F6 exec --no-startup-id "backlight_intel_notebook --dec 5"
-bindsym $mod+F7 exec --no-startup-id "backlight_intel_notebook --inc 5"
-bindsym Control+$mod+F6 exec --no-startup-id "backlight_intel_notebook --dec 20"
-bindsym Control+$mod+F7 exec --no-startup-id "backlight_intel_notebook --inc 20"
-bindsym Control+Shift+$mod+F6 exec --no-startup-id "backlight_intel_notebook 1"
-bindsym Control+Shift+$mod+F7 exec --no-startup-id "backlight_intel_notebook 120000"
+bindsym Shift+$mod+F6 exec --no-startup-id "backlight-notebook --dec 1"
+bindsym Shift+$mod+F7 exec --no-startup-id "backlight-notebook --inc 1"
+bindsym $mod+F6 exec --no-startup-id "backlight-notebook --dec 5"
+bindsym $mod+F7 exec --no-startup-id "backlight-notebook --inc 5"
+bindsym Control+$mod+F6 exec --no-startup-id "backlight-notebook --dec 20"
+bindsym Control+$mod+F7 exec --no-startup-id "backlight-notebook --inc 20"
+bindsym Control+Shift+$mod+F6 exec --no-startup-id "backlight-notebook 1"
+bindsym Control+Shift+$mod+F7 exec --no-startup-id "backlight-notebook 120000"
 bindsym $mod+F1 exec --no-startup-id "amixer sset Master toggle"
 bindsym $mod+F2 exec --no-startup-id "amixer sset Master 5%-"
 bindsym $mod+F3 exec --no-startup-id "amixer sset Master 5%+"
@@ -241,9 +243,12 @@ exec --no-startup-id "xss-lock slock"
 
 #exec konversation
 exec telegram
-exec --no-startup-id i3-msg "workspace $ws1; exec slack; workspace $ws1"
-exec --no-startup-id i3-msg "workspace $ws1; exec chromium; workspace $ws1"
-exec --no-startup-id i3-msg "workspace $ws4; exec kontact; workspace $ws1"
+exec signal
+exec slack
+#exec --no-startup-id i3-msg "workspace $ws1; exec slack; workspace $ws1"
+#exec --no-startup-id i3-msg "workspace $ws1; exec chromium; workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws1; exec google-chrome; workspace $ws1"
+#exec --no-startup-id i3-msg "workspace $ws4; exec kontact; workspace $ws1"
 exec thunderbird
 exec firefox
 exec --no-startup-id redshift
@@ -252,23 +257,33 @@ exec --no-startup-id caffeine
 #"env process='autossh.*65001' run_once ssh-tunnel_ibrokeit.suse.de_auto_65001"
 exec --no-startup-id "env process='openvpn/SUSE-okurz-NUE' run_once openvpn_suse"
 exec --no-startup-id "sleep 8; env process='autossh.*65000' run_once ssh-tunnel_kurz-wue_auto_65000"
-exec --no-startup-id "env process='sleep.*28' run_once fix-pulseaudio-headset-mic-preference"
-exec --no-startup-id i3-msg "workspace $ws3; exec urxvt; workspace $ws1"
-exec --no-startup-id i3-msg "workspace $ws3; exec urxvt; workspace $ws1"
+# not needed anymore with wireless headset. maybe also fixed with pipewire?
+#exec --no-startup-id "env process='sleep.*28' run_once fix-pulseaudio-headset-mic-preference"
+#exec --no-startup-id i3-msg "workspace $ws3; exec urxvt; workspace $ws1"
+#exec --no-startup-id i3-msg "workspace $ws3; exec urxvt; workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws3; exec alacritty; workspace $ws1"
+exec --no-startup-id i3-msg "workspace $ws3; exec alacritty; workspace $ws1"
+exec --no-startup-id "systemctl --user start tpm-fido@okurz.service"
 exec audacious
-exec pavucontrol
+# pavucontrol keeps my headset in low-quality duplex mode while open so do not
+# open by default
+#exec pavucontrol
 #exec --no-startup-id i3-msg "workspace $ws5; exec kapow; workspace $ws1"
 exec --no-startup-id qsyncthingtray
-exec --no-startup-id i3-msg "workspace $ws8; exec sipgate; workspace $ws1"
+exec --no-startup-id "syncthingtray"
+# now using app.sipgate.com browser tap
+#exec --no-startup-id i3-msg "workspace $ws8; exec sipgate; workspace $ws1"
 # https://superuser.com/questions/1147320/how-to-change-keyboard-layout-in-i3
 exec_always "setxkbmap de neo"
 
 assign [class="Konversation"] $ws1
 assign [class="Slack"] $ws1
 assign [class="Telegram"] $ws1
+assign [class="Signal"] $ws1
+assign [class="Signal"] $ws1
 assign [class="Firefox"] $ws2
 #assign [class="^URxvt$"] $ws3
-#assign [class="kontact"] $ws4
+assign [class="kontact"] $ws4
 assign [class="Thunderbird"] $ws4
 assign [class="Audacious"] $ws5
 assign [class="Pavucontrol"] $ws5

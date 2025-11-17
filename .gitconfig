@@ -14,7 +14,6 @@
     rmdir = true
     addAuthorFrom = true
     useLogAuthor = true
-
 [gui]
     fontui = -family \"Liberation Sans\" -size 9 -weight bold -slant roman -underline 0 -overstrike 0
     fontdiff = -family \"xos4 Terminus\" -size 8 -weight normal -slant roman -underline 0 -overstrike 0
@@ -34,6 +33,8 @@
     logr = log --reverse
     unmerged = !$EDITOR -p $(git-unmerged-files)
     resolved = !git add $(git-unmerged-files)
+    checkout-trusted = !git checkout $(git log --pretty=\"%G? %h\" | grep -m 1 -oP '(?<=U ).*')
+    checkout-certified = !git checkout $(git log --pretty=\"%G? %h\" | grep -m 1 -oP '(?<=G ).*')
     rebase-all-branches = !git-rebase-all-branches
     rebase-all-and-goto-next = !git stash && git rebase-all-branches && git co next && git stash pop
     r = !git pull --rebase origin
@@ -58,6 +59,10 @@
     rrab = !git rcc && git rebase-all-branches
     drab = !git delete-no-content-branches && git rebase-all-branches
     rap = !git-push-all-branches-to-fork
+    mr = "push -f okurz -o merge_request.create -o merge_request.target=master -o merge_request.remove_source_branch"
+    mwps = "push -f okurz -o merge_request.create -o merge_request.target=master -o merge_request.remove_source_branch -o merge_request.merge_when_pipeline_succeeds"
+    diffw = diff --word-diff=color
+    d = diff --word-diff=color
 
 [guitool "rebase..."]
     cmd = git rebase $REVISION
@@ -100,7 +105,9 @@
 [log]
     abbrevCommit = true
 [safe]
-	directory = /tmp
-	directory = /home/okurz/local/os-autoinst/os-autoinst
+    directory = /tmp
+    directory = /home/okurz/local/os-autoinst/os-autoinst
 [commit]
     gpgsign = true
+[url "gitea@src.opensuse.org:"]
+       insteadOf = soo:

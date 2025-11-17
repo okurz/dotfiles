@@ -15,7 +15,7 @@ XTerm.scrollKey: true
 XTerm.background: black
 XTerm.foreground: grey
 Aterm.transparent: true
-!Aterm.reverseVideo: truue
+#Aterm.reverseVideo: true
 Aterm.shading: 20
 Aterm.tinting: white
 Aterm.transpscrollbar: true

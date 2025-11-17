@@ -1,5 +1,78 @@
+#shell: zellij
 font:
   normal:
     family: "xos4 Terminess Powerline"
     style: Regular
   size: 7
+#colors:
+  #primary:
+    #grey: "#FF0000"
+#colors:
+#  primary:
+#    #foreground: "#181818"
+#    #background: "#d8d8d8"
+#    #foreground: "#d8d8d8"
+#    #background: "#181818"
+
+
+# Default (dark) color scheme
+#colors:
+#  # Default colors
+#  primary:
+#    background: '0x1e1e2e'
+#    foreground: '0xcdd6f4'
+#
+#  # Normal colors
+#  normal:
+#    black:   '0x45475a'
+#    red:     '0xf38ba8'
+#    green:   '0xa6e3a1'
+#    yellow:  '0xf9e2af'
+#    blue:    '0x89b4fa'
+#    magenta: '0xf5c2e7'
+#    cyan:    '0x94e2d5'
+#    white:   '0xbac2de'
+#
+#  # Bright colors
+#  bright:
+#    black:   '0x585b70'
+#    red:     '0xfab387'
+#    green:   '0xa6e3a1'
+#    yellow:  '0xf9e2af'
+#    blue:    '0x89b4fa'
+#    magenta: '0xf5c2e7'
+#    cyan:    '0x94e2d5'
+#    white:   '0xa6adc8'
+
+# Example of a "reversed" (light) color scheme
+# To switch to this, you would comment out the "Default (dark) color scheme" block above
+# and uncomment the "Example of a "reversed" (light) color scheme" block below.
+
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0xcdd6f4'
+#     foreground: '0x1e1e2e'
+
+#   # Normal colors
+#   normal:
+#     black:   '0xbac2de'
+#     red:     '0xf38ba8'
+#     green:   '0xa6e3a1'
+#     yellow:  '0xf9e2af'
+#     blue:    '0x89b4fa'
+#     magenta: '0xf5c2e7'
+#     cyan:    '0x94e2d5'
+#     white:   '0x45475a'
+
+#   # Bright colors
+#   bright:
+#     black:   '0xa6adc8'
+#     red:     '0xfab387'
+#     green:   '0xa6e3a1'
+#     yellow:  '0xf9e2af'
+#     blue:    '0x89b4fa'
+#     magenta: '0xf5c2e7'
+#     cyan:    '0x94e2d5'
+#     white:   '0x585b70'
+

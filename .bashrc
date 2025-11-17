@@ -439,3 +439,4 @@ function xcol()
 #    unbuffer $(which prove) --color $* | xcolorize --unbuffered green '^\s*ok [[:digit:]] - .*$' red 'not ok [[:digit:]]* - .*$'
 #}
 . ~/.openqa_ipmi_aliases
+PROG=tea source "/home/okurz/.config/tea/autocomplete.sh"
