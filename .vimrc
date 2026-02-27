@@ -743,7 +743,9 @@ set nowritebackup
 
 set nu
 
-let g:ale_linters = {'python': ['ruff']}
+let g:ale_linters = {'python': ['ruff', 'ty']}
+let g:ale_fixers = ['remove_trailing_lines', 'trim_whitespace', 'ruff_format']
+let g:ale_fix_on_save = 1
 
 " https://docs.astral.sh/ruff/editors/setup/#vim
 if executable('ruff')
