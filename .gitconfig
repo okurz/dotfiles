@@ -37,7 +37,7 @@
     checkout-certified = !git checkout $(git log --pretty=\"%G? %h\" | grep -m 1 -oP '(?<=G ).*')
     rebase-all-branches = !git-rebase-all-branches
     rebase-all-and-goto-next = !git stash && git rebase-all-branches && git co next && git stash pop
-    r = !git pull --rebase origin
+    r = !git pull --rebase origin HEAD
     rp = !git-rebase-and-push
     ri = rebase --interactive --rerere-autoupdate
     ria = rebase --interactive --autosquash --rerere-autoupdate
@@ -45,7 +45,7 @@
     ra = rebase --abort
     rs = rebase --skip
     rcc = !git resolved && git rebase --continue
-    rp = !git pull --rebase origin master && git push okurz -f
+    p = push okurz -f
     ;review-branch = !git-review-branch
     log1 = log --pretty=oneline --abbrev-commit
     amend = commit --amend -C HEAD
@@ -111,3 +111,5 @@
     gpgsign = true
 [url "gitea@src.opensuse.org:"]
        insteadOf = soo:
+[init]
+	defaultBranch = main
