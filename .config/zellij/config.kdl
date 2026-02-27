@@ -1,0 +1,36 @@
+---
+layout "compact"
+mouse_mode true
+copy_on_select true
+pane_frames false
+
+theme "solarized-light"
+
+themes {
+    solarized-light {
+        fg "#586e75"         // Dark grey/blue text
+        bg "#fdf6e3"         // Classic Solarized light cream
+        black "#073642"
+        red "#dc322f"
+        green "#859900"
+        yellow "#b58900"     // This will be darker and more readable
+        blue "#268bd2"
+        magenta "#d33682"
+        cyan "#2aa198"
+        white "#eee8d5"
+        orange "#cb4b16"
+    }
+}
+
+keybinds {
+    shared_except "locked" {
+        unbind "Alt f" // free up Alt+f for Readline/bash/zsh
+
+        // Konsole-style tab management
+        bind "Ctrl Shift t" { NewTab; }
+        bind "Ctrl Shift Left" { GoToPreviousTab; }
+        bind "Ctrl Shift Right" { GoToNextTab; }
+        bind "Ctrl (" { NewPane "Right"; }
+        bind "Ctrl )" { NewPane "Down"; }
+    }
+}
