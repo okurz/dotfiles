@@ -1,0 +1,10 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/themes/github_light.toml"
+]
+[font]
+size = 7
+
+[font.normal]
+family = "xos4 Terminess Powerline"
+style = "Regular"
